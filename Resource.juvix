@@ -1,0 +1,22 @@
+module Resource;
+
+-- Imports
+import Stdlib.Prelude open;
+import Anoma open;
+import Anoma.Builtin.System open;
+import Applib open;
+
+axiom TODO : {A : Type} -> A;
+
+-- Resource Object
+mkCounter {count : Nat := 0} {ephemeral : Bool := false} : Resource :=
+  mkResource@{
+    logicRef := TODO;
+    labelRef := TODO;
+    valueRef := TODO;
+    quantity := 1;
+    ephemeral;
+    nullifierKeyCommitment := toNullifierKeyCommitment Universal.identity;
+    nonce := mkNonce rand;
+    randSeed := mkRandSeed rand;
+  };
