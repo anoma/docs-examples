@@ -4,16 +4,5 @@ import Stdlib.Prelude open;
 import Anoma open;
 import Anoma.Builtin.System open;
 
--- Works, `Value.unvalue` can be used
-getCount0 (resource : Resource) : Nat :=
-    resource |> Resource.valueRef |> Reference.from |> Value.unValue;
-
--- Doesn't work, error: `Qualified symbol not in scope: Value.unvalue`
-getCount1 (resource : Resource) : Nat :=
-  let
-    valueRef : ValueRef := Resource.valueRef resource;
-    value : Value := Reference.from valueRef;
-  in Value.unvalue value;
-
--- Doesn't work, error: `Qualified symbol not in scope: Value.unvalue`
-getCount2 (resource : Resource) : Nat := Value.unvalue (Reference.from (Resource.valueRef (resource)));
+getCount (resource : Resource) : Nat :=
+  Value.unValue (Reference.from (Resource.valueRef (resource)));
